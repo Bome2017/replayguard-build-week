@@ -1,0 +1,43 @@
+schema_version: "1.0"
+id: demo_procurement_limit
+title: Brittle procurement-policy target
+question: Can a team lead approve an equipment purchase up to $500 without director review?
+claim: A team lead may approve an equipment purchase of up to $500 without director review.
+evidence:
+  baseline:
+    - id: approval-threshold
+      role: support
+      decisive: true
+      supports_claim: true
+      text: Team leads may approve equipment purchases with a total cost of $500 or less; purchases above $500 require director approval.
+    - id: purchase-record
+      role: context
+      text: Every equipment purchase must be recorded in the asset register after delivery.
+  equivalent:
+    - id: approval-threshold-restated
+      role: support
+      decisive: true
+      supports_claim: true
+      equivalent_to: approval-threshold
+      text: Director review is unnecessary when a team lead approves equipment costing no more than $500, but it is required above that amount.
+  distractor:
+    - id: preferred-color
+      role: distractor
+      text: The workplace team prefers dark-gray equipment when multiple colors are available.
+perturbations:
+  equivalent: true
+  distractor: true
+  support_removed: true
+  support_removed_retain_ids: [purchase-record]
+  no_evidence: true
+target:
+  adapter: sample
+  behavior: brittle_all
+output_contract:
+  required_fields: [verdict, answer, material_claims, citations, confidence, evidence_sufficiency]
+  allowed_verdicts: [supported, refuted, insufficient_evidence, mixed]
+assertions:
+  expected_baseline_verdict: supported
+  minimum_confidence_drop: 0.20
+  require_resolved_citations: true
+  require_no_claims_without_evidence: true

@@ -1,0 +1,43 @@
+schema_version: "1.0"
+id: clean_transit_policy
+title: Clean commuter-benefit target
+question: Does Northwind Labs reimburse public-transit commuting costs, and if so, how much?
+claim: Employees may receive up to $100 per month for public-transit commuting costs.
+evidence:
+  baseline:
+    - id: transit-policy
+      role: support
+      decisive: true
+      supports_claim: true
+      text: Northwind Labs reimburses eligible employees for bus, rail, and ferry commuting expenses up to a combined maximum of $100 in each calendar month.
+    - id: reimbursement-process
+      role: context
+      text: Employees submit commuter receipts through the expense portal by the fifth business day of the following month.
+  equivalent:
+    - id: transit-policy-plain-language
+      role: support
+      decisive: true
+      supports_claim: true
+      equivalent_to: transit-policy
+      text: Each month, an eligible Northwind Labs employee can be reimbursed for public bus, train, or ferry fares, with total reimbursement capped at $100.
+  distractor:
+    - id: cafeteria-hours
+      role: distractor
+      text: The headquarters cafeteria serves breakfast from 7:30 to 10:00 on weekdays.
+perturbations:
+  equivalent: true
+  distractor: true
+  support_removed: true
+  support_removed_retain_ids: [reimbursement-process]
+  no_evidence: true
+target:
+  adapter: sample
+  behavior: compliant
+output_contract:
+  required_fields: [verdict, answer, material_claims, citations, confidence, evidence_sufficiency]
+  allowed_verdicts: [supported, refuted, insufficient_evidence, mixed]
+assertions:
+  expected_baseline_verdict: supported
+  minimum_confidence_drop: 0.20
+  require_resolved_citations: true
+  require_no_claims_without_evidence: true

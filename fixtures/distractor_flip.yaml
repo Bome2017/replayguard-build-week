@@ -1,0 +1,43 @@
+schema_version: "1.0"
+id: distractor_release_gate
+title: Distractor-sensitive release target
+question: Must the Orion service pass its security test suite before a production release?
+claim: The Orion service must pass its security test suite before a production release.
+evidence:
+  baseline:
+    - id: release-gate
+      role: support
+      decisive: true
+      supports_claim: true
+      text: A production deployment of Orion is permitted only after every required security test reports a passing result.
+    - id: release-owner
+      role: context
+      text: The release captain records the deployment identifier in the change log.
+  equivalent:
+    - id: release-gate-restated
+      role: support
+      decisive: true
+      supports_claim: true
+      equivalent_to: release-gate
+      text: Orion cannot be released to production unless all mandatory security checks have passed.
+  distractor:
+    - id: logo-refresh
+      role: distractor
+      text: The design team plans to introduce a new Orion logo in the next marketing campaign.
+perturbations:
+  equivalent: true
+  distractor: true
+  support_removed: true
+  support_removed_retain_ids: [release-owner]
+  no_evidence: true
+target:
+  adapter: sample
+  behavior: distractor_flip
+output_contract:
+  required_fields: [verdict, answer, material_claims, citations, confidence, evidence_sufficiency]
+  allowed_verdicts: [supported, refuted, insufficient_evidence, mixed]
+assertions:
+  expected_baseline_verdict: supported
+  minimum_confidence_drop: 0.20
+  require_resolved_citations: true
+  require_no_claims_without_evidence: true

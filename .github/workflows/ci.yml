@@ -1,0 +1,46 @@
+name: ReplayGuard CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - name: Install pinned environment
+        run: |
+          python -m pip install -r requirements.lock
+          python -m pip install -e . --no-deps
+      - name: Verify code
+        run: |
+          ruff format --check src tests
+          ruff check src tests
+          python -m pytest
+      - name: Verify clean and brittle CI contracts
+        shell: bash
+        run: |
+          replayguard test fixtures/clean_policy.yaml \
+            --analysis-mode deterministic \
+            --output reports/ci-clean
+          set +e
+          replayguard test fixtures/demo_brittle.yaml \
+            --analysis-mode deterministic \
+            --output reports/ci-brittle
+          replayguard_status=$?
+          set -e
+          test "$replayguard_status" -eq 1
+      - name: Upload report examples
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: replayguard-reports
+          path: reports/ci-*

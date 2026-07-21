@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "replayguard"
+version = "0.1.0"
+description = "Metamorphic regression testing for evidence-grounded AI systems."
+readme = "README.md"
+license = "LicenseRef-PolyForm-Noncommercial-1.0.0"
+license-files = ["LICENSE", "COMMERCIAL-LICENSING.md"]
+requires-python = ">=3.11"
+authors = [{name = "ReplayGuard contributors"}]
+keywords = ["metamorphic-testing", "rag", "evals", "ci", "openai"]
+dependencies = [
+    "jinja2>=3.1,<4",
+    "openai>=2,<3",
+    "pydantic>=2.10,<3",
+    "PyYAML>=6,<7",
+    "typer>=0.15,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=9.0.3,<10",
+    "ruff>=0.11,<1",
+]
+
+[project.scripts]
+replayguard = "replayguard.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+replayguard = ["templates/*.j2"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
