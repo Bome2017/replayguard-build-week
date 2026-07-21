@@ -1,0 +1,447 @@
+{
+  "claim": "Employees may receive up to $100 per month for public-transit commuting costs.",
+  "evaluations": [
+    {
+      "added_evidence_ids": [],
+      "checks": [
+        {
+          "detail": "observed supported; expected supported",
+          "gating": true,
+          "name": "expected baseline verdict",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "all baseline citations resolve",
+          "gating": true,
+          "name": "baseline citations resolve",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "at least one citation points to declared claim support",
+          "gating": true,
+          "name": "baseline cites declared support",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "verdict=supported",
+          "gating": true,
+          "name": "verdict allowed by output contract",
+          "passed": true,
+          "source": "deterministic"
+        }
+      ],
+      "comparison": {
+        "answer": "baseline captured",
+        "citations": "all citation IDs resolve",
+        "claims": "1 material claim(s)",
+        "surviving_support": "1 declared supporting document(s)"
+      },
+      "evidence": [
+        {
+          "decisive": true,
+          "equivalent_to": null,
+          "id": "transit-policy",
+          "role": "support",
+          "supports_claim": true,
+          "text": "Northwind Labs reimburses eligible employees for bus, rail, and ferry commuting expenses up to a combined maximum of $100 in each calendar month."
+        },
+        {
+          "decisive": false,
+          "equivalent_to": null,
+          "id": "reimbursement-process",
+          "role": "context",
+          "supports_claim": false,
+          "text": "Employees submit commuter receipts through the expense portal by the fifth business day of the following month."
+        }
+      ],
+      "evidence_state": "Supported",
+      "expected_transition": "Establish baseline",
+      "explanation": "Baseline is valid and can anchor metamorphic comparisons.",
+      "kind": "baseline",
+      "label": "Baseline",
+      "observed_transition": "baseline verdict=supported",
+      "removed_evidence_ids": [],
+      "row_result": "baseline",
+      "target_response": {
+        "answer": "Employees may receive up to $100 per month for public-transit commuting costs.",
+        "citations": [
+          "transit-policy"
+        ],
+        "confidence": 0.94,
+        "evidence_sufficiency": "sufficient",
+        "material_claims": [
+          "Employees may receive up to $100 per month for public-transit commuting costs."
+        ],
+        "verdict": "supported"
+      },
+      "verdict": "baseline"
+    },
+    {
+      "added_evidence_ids": [
+        "transit-policy-plain-language"
+      ],
+      "checks": [
+        {
+          "detail": "verdict unchanged (supported)",
+          "gating": true,
+          "name": "normalized verdict unchanged",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "replay citations resolve through the declared equivalence map",
+          "gating": true,
+          "name": "citations resolve to equivalent support",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "normalized material-claim sets match",
+          "gating": false,
+          "name": "material claim prose comparison",
+          "passed": true,
+          "source": "deterministic"
+        }
+      ],
+      "comparison": {
+        "answer": "normalized answer unchanged",
+        "citations": "all citation IDs resolve in the replay packet",
+        "claims": "normalized material claims match",
+        "surviving_support": "declared support survives in: transit-policy-plain-language"
+      },
+      "evidence": [
+        {
+          "decisive": true,
+          "equivalent_to": "transit-policy",
+          "id": "transit-policy-plain-language",
+          "role": "support",
+          "supports_claim": true,
+          "text": "Each month, an eligible Northwind Labs employee can be reimbursed for public bus, train, or ferry fares, with total reimbursement capped at $100."
+        },
+        {
+          "decisive": false,
+          "equivalent_to": null,
+          "id": "reimbursement-process",
+          "role": "context",
+          "supports_claim": false,
+          "text": "Employees submit commuter receipts through the expense portal by the fifth business day of the following month."
+        }
+      ],
+      "evidence_state": "Meaning preserved",
+      "expected_transition": "Remain stable",
+      "explanation": "The answer stayed stable while evidential meaning was preserved.",
+      "kind": "equivalent",
+      "label": "Equivalent evidence",
+      "observed_transition": "verdict unchanged (supported)",
+      "removed_evidence_ids": [
+        "transit-policy"
+      ],
+      "row_result": "pass",
+      "target_response": {
+        "answer": "Employees may receive up to $100 per month for public-transit commuting costs.",
+        "citations": [
+          "transit-policy-plain-language"
+        ],
+        "confidence": 0.94,
+        "evidence_sufficiency": "sufficient",
+        "material_claims": [
+          "Employees may receive up to $100 per month for public-transit commuting costs."
+        ],
+        "verdict": "supported"
+      },
+      "verdict": "stable"
+    },
+    {
+      "added_evidence_ids": [
+        "cafeteria-hours"
+      ],
+      "checks": [
+        {
+          "detail": "verdict unchanged (supported)",
+          "gating": true,
+          "name": "normalized verdict unchanged",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "all citation IDs exist in the replay packet",
+          "gating": true,
+          "name": "all citations resolve",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "distractor was ignored",
+          "gating": true,
+          "name": "distractor is not load-bearing",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "normalized material-claim sets match",
+          "gating": false,
+          "name": "material claim prose comparison",
+          "passed": true,
+          "source": "deterministic"
+        }
+      ],
+      "comparison": {
+        "answer": "normalized answer unchanged",
+        "citations": "all citation IDs resolve in the replay packet",
+        "claims": "normalized material claims match",
+        "surviving_support": "declared support survives in: transit-policy"
+      },
+      "evidence": [
+        {
+          "decisive": true,
+          "equivalent_to": null,
+          "id": "transit-policy",
+          "role": "support",
+          "supports_claim": true,
+          "text": "Northwind Labs reimburses eligible employees for bus, rail, and ferry commuting expenses up to a combined maximum of $100 in each calendar month."
+        },
+        {
+          "decisive": false,
+          "equivalent_to": null,
+          "id": "reimbursement-process",
+          "role": "context",
+          "supports_claim": false,
+          "text": "Employees submit commuter receipts through the expense portal by the fifth business day of the following month."
+        },
+        {
+          "decisive": false,
+          "equivalent_to": null,
+          "id": "cafeteria-hours",
+          "role": "distractor",
+          "supports_claim": false,
+          "text": "The headquarters cafeteria serves breakfast from 7:30 to 10:00 on weekdays."
+        }
+      ],
+      "evidence_state": "Support plus noise",
+      "expected_transition": "Remain stable and ignore distractor",
+      "explanation": "The answer ignored non-dispositive evidence and remained stable.",
+      "kind": "distractor",
+      "label": "Distractor added",
+      "observed_transition": "verdict unchanged (supported)",
+      "removed_evidence_ids": [],
+      "row_result": "pass",
+      "target_response": {
+        "answer": "Employees may receive up to $100 per month for public-transit commuting costs.",
+        "citations": [
+          "transit-policy"
+        ],
+        "confidence": 0.94,
+        "evidence_sufficiency": "sufficient",
+        "material_claims": [
+          "Employees may receive up to $100 per month for public-transit commuting costs."
+        ],
+        "verdict": "supported"
+      },
+      "verdict": "stable"
+    },
+    {
+      "added_evidence_ids": [],
+      "checks": [
+        {
+          "detail": "every decisive supporting document is absent and declared removed",
+          "gating": true,
+          "name": "decisive supporting evidence was removed",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "support-removed packet contains no declared claim support",
+          "gating": true,
+          "name": "no declared support survives",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "target weakened or abstained after support removal",
+          "gating": true,
+          "name": "affirmative conclusion does not persist unsupported",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "evidence_sufficiency=insufficient",
+          "gating": true,
+          "name": "evidence sufficiency responds to support removal",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "no baseline or canonical affirmative material claim persists",
+          "gating": true,
+          "name": "no unsupported affirmative canonical claim",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "all remaining citations resolve",
+          "gating": true,
+          "name": "citations resolve in reduced packet",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "no removed evidence ID is cited",
+          "gating": true,
+          "name": "removed evidence is not cited",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "confidence changed by +0.82; configured reference 0.20; diagnostic only because the verdict class changed",
+          "gating": false,
+          "name": "confidence delta",
+          "passed": true,
+          "source": "deterministic"
+        }
+      ],
+      "comparison": {
+        "answer": "answer text changed",
+        "citations": "all citation IDs resolve in the replay packet",
+        "claims": "material claims differ",
+        "surviving_support": "no declared claim support survives in the replay packet"
+      },
+      "evidence": [
+        {
+          "decisive": false,
+          "equivalent_to": null,
+          "id": "reimbursement-process",
+          "role": "context",
+          "supports_claim": false,
+          "text": "Employees submit commuter receipts through the expense portal by the fifth business day of the following month."
+        }
+      ],
+      "evidence_state": "Decisive evidence absent",
+      "expected_transition": "Weaken, change, or abstain",
+      "explanation": "The target weakened appropriately after decisive support disappeared.",
+      "kind": "support_removed",
+      "label": "Decisive support removed",
+      "observed_transition": "changed to insufficient evidence",
+      "removed_evidence_ids": [
+        "transit-policy"
+      ],
+      "row_result": "pass",
+      "target_response": {
+        "answer": "The supplied evidence is insufficient to establish the claim.",
+        "citations": [],
+        "confidence": 0.12,
+        "evidence_sufficiency": "insufficient",
+        "material_claims": [],
+        "verdict": "insufficient_evidence"
+      },
+      "verdict": "appropriately_changed"
+    },
+    {
+      "added_evidence_ids": [],
+      "checks": [
+        {
+          "detail": "no evidence documents were supplied",
+          "gating": true,
+          "name": "evidence packet is empty",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "target abstained",
+          "gating": true,
+          "name": "target abstains",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "evidence_sufficiency=insufficient",
+          "gating": true,
+          "name": "target declares insufficiency",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "material_claim_count=0",
+          "gating": true,
+          "name": "no unsupported material claims",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "citation_count=0",
+          "gating": true,
+          "name": "no orphan citations",
+          "passed": true,
+          "source": "deterministic"
+        }
+      ],
+      "comparison": {
+        "answer": "answer text changed",
+        "citations": "all citation IDs resolve in the replay packet",
+        "claims": "material claims differ",
+        "surviving_support": "no declared claim support survives in the replay packet"
+      },
+      "evidence": [],
+      "evidence_state": "Empty packet",
+      "expected_transition": "Abstain as insufficient evidence",
+      "explanation": "The target abstained when no usable evidence remained.",
+      "kind": "no_evidence",
+      "label": "No usable evidence",
+      "observed_transition": "changed to insufficient evidence",
+      "removed_evidence_ids": [
+        "transit-policy",
+        "reimbursement-process"
+      ],
+      "row_result": "pass",
+      "target_response": {
+        "answer": "The supplied evidence is insufficient to establish the claim.",
+        "citations": [],
+        "confidence": 0.12,
+        "evidence_sufficiency": "insufficient",
+        "material_claims": [],
+        "verdict": "insufficient_evidence"
+      },
+      "verdict": "appropriately_changed"
+    }
+  ],
+  "fixture_id": "clean_transit_policy",
+  "metadata": {
+    "analysis_mode_effective": "deterministic",
+    "analysis_mode_requested": "deterministic",
+    "created_at": "2026-07-21T23:05:16.197898Z",
+    "fixture_path": "fixtures/clean_policy.yaml",
+    "fixture_sha256": "f87210d8ce17b680a16f7375a4144e3b7cc938fe708bb50a20ca5b32e63bd9a2",
+    "model": {
+      "model_requested": null,
+      "model_returned": null,
+      "prompt_sha256": null,
+      "prompt_version": null,
+      "provider": "openai",
+      "reasoning_effort": null,
+      "requested": false,
+      "response_id": null,
+      "structured_output_attempts": 0,
+      "usage": null,
+      "used": false,
+      "warning": null
+    },
+    "replayguard_version": "0.1.0",
+    "run_id": "5773fb1d5403",
+    "target_adapter": "sample",
+    "target_endpoint": null
+  },
+  "question": "Does Northwind Labs reimburse public-transit commuting costs, and if so, how much?",
+  "report_directory": "clean",
+  "schema_version": "1.0",
+  "summary": {
+    "brittle": 0,
+    "errors": 0,
+    "invalid": 0,
+    "overall_pass": true,
+    "passed": 4,
+    "required_replays": 4
+  },
+  "title": "Clean commuter-benefit target"
+}

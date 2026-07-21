@@ -1,0 +1,455 @@
+{
+  "claim": "A team lead may approve an equipment purchase of up to $500 without director review.",
+  "evaluations": [
+    {
+      "added_evidence_ids": [],
+      "checks": [
+        {
+          "detail": "observed supported; expected supported",
+          "gating": true,
+          "name": "expected baseline verdict",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "all baseline citations resolve",
+          "gating": true,
+          "name": "baseline citations resolve",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "at least one citation points to declared claim support",
+          "gating": true,
+          "name": "baseline cites declared support",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "verdict=supported",
+          "gating": true,
+          "name": "verdict allowed by output contract",
+          "passed": true,
+          "source": "deterministic"
+        }
+      ],
+      "comparison": {
+        "answer": "baseline captured",
+        "citations": "all citation IDs resolve",
+        "claims": "1 material claim(s)",
+        "surviving_support": "1 declared supporting document(s)"
+      },
+      "evidence": [
+        {
+          "decisive": true,
+          "equivalent_to": null,
+          "id": "approval-threshold",
+          "role": "support",
+          "supports_claim": true,
+          "text": "Team leads may approve equipment purchases with a total cost of $500 or less; purchases above $500 require director approval."
+        },
+        {
+          "decisive": false,
+          "equivalent_to": null,
+          "id": "purchase-record",
+          "role": "context",
+          "supports_claim": false,
+          "text": "Every equipment purchase must be recorded in the asset register after delivery."
+        }
+      ],
+      "evidence_state": "Supported",
+      "expected_transition": "Establish baseline",
+      "explanation": "Baseline is valid and can anchor metamorphic comparisons.",
+      "kind": "baseline",
+      "label": "Baseline",
+      "observed_transition": "baseline verdict=supported",
+      "removed_evidence_ids": [],
+      "row_result": "baseline",
+      "target_response": {
+        "answer": "A team lead may approve an equipment purchase of up to $500 without director review.",
+        "citations": [
+          "approval-threshold"
+        ],
+        "confidence": 0.94,
+        "evidence_sufficiency": "sufficient",
+        "material_claims": [
+          "A team lead may approve an equipment purchase of up to $500 without director review."
+        ],
+        "verdict": "supported"
+      },
+      "verdict": "baseline"
+    },
+    {
+      "added_evidence_ids": [
+        "approval-threshold-restated"
+      ],
+      "checks": [
+        {
+          "detail": "verdict unchanged (supported)",
+          "gating": true,
+          "name": "normalized verdict unchanged",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "replay citations resolve through the declared equivalence map",
+          "gating": true,
+          "name": "citations resolve to equivalent support",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "normalized material-claim sets match",
+          "gating": false,
+          "name": "material claim prose comparison",
+          "passed": true,
+          "source": "deterministic"
+        }
+      ],
+      "comparison": {
+        "answer": "normalized answer unchanged",
+        "citations": "all citation IDs resolve in the replay packet",
+        "claims": "normalized material claims match",
+        "surviving_support": "declared support survives in: approval-threshold-restated"
+      },
+      "evidence": [
+        {
+          "decisive": true,
+          "equivalent_to": "approval-threshold",
+          "id": "approval-threshold-restated",
+          "role": "support",
+          "supports_claim": true,
+          "text": "Director review is unnecessary when a team lead approves equipment costing no more than $500, but it is required above that amount."
+        },
+        {
+          "decisive": false,
+          "equivalent_to": null,
+          "id": "purchase-record",
+          "role": "context",
+          "supports_claim": false,
+          "text": "Every equipment purchase must be recorded in the asset register after delivery."
+        }
+      ],
+      "evidence_state": "Meaning preserved",
+      "expected_transition": "Remain stable",
+      "explanation": "The answer stayed stable while evidential meaning was preserved.",
+      "kind": "equivalent",
+      "label": "Equivalent evidence",
+      "observed_transition": "verdict unchanged (supported)",
+      "removed_evidence_ids": [
+        "approval-threshold"
+      ],
+      "row_result": "pass",
+      "target_response": {
+        "answer": "A team lead may approve an equipment purchase of up to $500 without director review.",
+        "citations": [
+          "approval-threshold-restated"
+        ],
+        "confidence": 0.94,
+        "evidence_sufficiency": "sufficient",
+        "material_claims": [
+          "A team lead may approve an equipment purchase of up to $500 without director review."
+        ],
+        "verdict": "supported"
+      },
+      "verdict": "stable"
+    },
+    {
+      "added_evidence_ids": [
+        "preferred-color"
+      ],
+      "checks": [
+        {
+          "detail": "reversed to refuted",
+          "gating": true,
+          "name": "normalized verdict unchanged",
+          "passed": false,
+          "source": "deterministic"
+        },
+        {
+          "detail": "all citation IDs exist in the replay packet",
+          "gating": true,
+          "name": "all citations resolve",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "target cited the declared distractor as evidence",
+          "gating": true,
+          "name": "distractor is not load-bearing",
+          "passed": false,
+          "source": "deterministic"
+        },
+        {
+          "detail": "material-claim prose differs; advisory only because verdict expresses disposition",
+          "gating": false,
+          "name": "material claim prose comparison",
+          "passed": false,
+          "source": "deterministic"
+        }
+      ],
+      "comparison": {
+        "answer": "answer text changed",
+        "citations": "all citation IDs resolve in the replay packet",
+        "claims": "material claims differ",
+        "surviving_support": "declared support survives in: approval-threshold"
+      },
+      "evidence": [
+        {
+          "decisive": true,
+          "equivalent_to": null,
+          "id": "approval-threshold",
+          "role": "support",
+          "supports_claim": true,
+          "text": "Team leads may approve equipment purchases with a total cost of $500 or less; purchases above $500 require director approval."
+        },
+        {
+          "decisive": false,
+          "equivalent_to": null,
+          "id": "purchase-record",
+          "role": "context",
+          "supports_claim": false,
+          "text": "Every equipment purchase must be recorded in the asset register after delivery."
+        },
+        {
+          "decisive": false,
+          "equivalent_to": null,
+          "id": "preferred-color",
+          "role": "distractor",
+          "supports_claim": false,
+          "text": "The workplace team prefers dark-gray equipment when multiple colors are available."
+        }
+      ],
+      "evidence_state": "Support plus noise",
+      "expected_transition": "Remain stable and ignore distractor",
+      "explanation": "Distractor invariance contract failed: reversed to refuted; target cited the declared distractor as evidence",
+      "kind": "distractor",
+      "label": "Distractor added",
+      "observed_transition": "reversed to refuted",
+      "removed_evidence_ids": [],
+      "row_result": "fail",
+      "target_response": {
+        "answer": "The added operational note changes the conclusion, so the stated claim should be treated as false.",
+        "citations": [
+          "preferred-color"
+        ],
+        "confidence": 0.88,
+        "evidence_sufficiency": "sufficient",
+        "material_claims": [
+          "The following claim is false: A team lead may approve an equipment purchase of up to $500 without director review."
+        ],
+        "verdict": "refuted"
+      },
+      "verdict": "brittle"
+    },
+    {
+      "added_evidence_ids": [],
+      "checks": [
+        {
+          "detail": "every decisive supporting document is absent and declared removed",
+          "gating": true,
+          "name": "decisive supporting evidence was removed",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "support-removed packet contains no declared claim support",
+          "gating": true,
+          "name": "no declared support survives",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "target preserved or replaced the conclusion without surviving support",
+          "gating": true,
+          "name": "affirmative conclusion does not persist unsupported",
+          "passed": false,
+          "source": "deterministic"
+        },
+        {
+          "detail": "evidence_sufficiency=sufficient",
+          "gating": true,
+          "name": "evidence sufficiency responds to support removal",
+          "passed": false,
+          "source": "deterministic"
+        },
+        {
+          "detail": "unsupported affirmative material claims persist: A team lead may approve an equipment purchase of up to $500 without director review.",
+          "gating": true,
+          "name": "no unsupported affirmative canonical claim",
+          "passed": false,
+          "source": "deterministic"
+        },
+        {
+          "detail": "citations point to removed evidence: approval-threshold",
+          "gating": true,
+          "name": "citations resolve in reduced packet",
+          "passed": false,
+          "source": "deterministic"
+        },
+        {
+          "detail": "removed evidence IDs cited: approval-threshold",
+          "gating": true,
+          "name": "removed evidence is not cited",
+          "passed": false,
+          "source": "deterministic"
+        },
+        {
+          "detail": "confidence changed by +0.02; configured reference 0.20; diagnostic only because the verdict class changed",
+          "gating": false,
+          "name": "confidence delta",
+          "passed": false,
+          "source": "deterministic"
+        }
+      ],
+      "comparison": {
+        "answer": "normalized answer unchanged",
+        "citations": "citations missing from replay packet: approval-threshold",
+        "claims": "normalized material claims match",
+        "surviving_support": "no declared claim support survives in the replay packet"
+      },
+      "evidence": [
+        {
+          "decisive": false,
+          "equivalent_to": null,
+          "id": "purchase-record",
+          "role": "context",
+          "supports_claim": false,
+          "text": "Every equipment purchase must be recorded in the asset register after delivery."
+        }
+      ],
+      "evidence_state": "Decisive evidence absent",
+      "expected_transition": "Weaken, change, or abstain",
+      "explanation": "Sensitivity contract failed: target preserved or replaced the conclusion without surviving support; evidence_sufficiency=sufficient; unsupported affirmative material claims persist: A team lead may approve an equipment purchase of up to $500 without director review.; citations point to removed evidence: approval-threshold; removed evidence IDs cited: approval-threshold",
+      "kind": "support_removed",
+      "label": "Decisive support removed",
+      "observed_transition": "verdict unchanged (supported)",
+      "removed_evidence_ids": [
+        "approval-threshold"
+      ],
+      "row_result": "fail",
+      "target_response": {
+        "answer": "A team lead may approve an equipment purchase of up to $500 without director review.",
+        "citations": [
+          "approval-threshold"
+        ],
+        "confidence": 0.92,
+        "evidence_sufficiency": "sufficient",
+        "material_claims": [
+          "A team lead may approve an equipment purchase of up to $500 without director review."
+        ],
+        "verdict": "supported"
+      },
+      "verdict": "brittle"
+    },
+    {
+      "added_evidence_ids": [],
+      "checks": [
+        {
+          "detail": "no evidence documents were supplied",
+          "gating": true,
+          "name": "evidence packet is empty",
+          "passed": true,
+          "source": "deterministic"
+        },
+        {
+          "detail": "target failed to abstain; observed verdict=supported",
+          "gating": true,
+          "name": "target abstains",
+          "passed": false,
+          "source": "deterministic"
+        },
+        {
+          "detail": "evidence_sufficiency=sufficient",
+          "gating": true,
+          "name": "target declares insufficiency",
+          "passed": false,
+          "source": "deterministic"
+        },
+        {
+          "detail": "material_claim_count=1",
+          "gating": true,
+          "name": "no unsupported material claims",
+          "passed": false,
+          "source": "deterministic"
+        },
+        {
+          "detail": "citation_count=1",
+          "gating": true,
+          "name": "no orphan citations",
+          "passed": false,
+          "source": "deterministic"
+        }
+      ],
+      "comparison": {
+        "answer": "normalized answer unchanged",
+        "citations": "citations missing from replay packet: approval-threshold",
+        "claims": "normalized material claims match",
+        "surviving_support": "no declared claim support survives in the replay packet"
+      },
+      "evidence": [],
+      "evidence_state": "Empty packet",
+      "expected_transition": "Abstain as insufficient evidence",
+      "explanation": "No-evidence sensitivity contract failed: target failed to abstain; observed verdict=supported; evidence_sufficiency=sufficient; material_claim_count=1; citation_count=1",
+      "kind": "no_evidence",
+      "label": "No usable evidence",
+      "observed_transition": "verdict unchanged (supported)",
+      "removed_evidence_ids": [
+        "approval-threshold",
+        "purchase-record"
+      ],
+      "row_result": "fail",
+      "target_response": {
+        "answer": "A team lead may approve an equipment purchase of up to $500 without director review.",
+        "citations": [
+          "approval-threshold"
+        ],
+        "confidence": 0.92,
+        "evidence_sufficiency": "sufficient",
+        "material_claims": [
+          "A team lead may approve an equipment purchase of up to $500 without director review."
+        ],
+        "verdict": "supported"
+      },
+      "verdict": "brittle"
+    }
+  ],
+  "fixture_id": "demo_procurement_limit",
+  "metadata": {
+    "analysis_mode_effective": "deterministic",
+    "analysis_mode_requested": "deterministic",
+    "created_at": "2026-07-21T23:05:16.180363Z",
+    "fixture_path": "fixtures/demo_brittle.yaml",
+    "fixture_sha256": "2de828375800615cc63cefec062e7696583c74bd993244605e0e921843e6b3a7",
+    "model": {
+      "model_requested": null,
+      "model_returned": null,
+      "prompt_sha256": null,
+      "prompt_version": null,
+      "provider": "openai",
+      "reasoning_effort": null,
+      "requested": false,
+      "response_id": null,
+      "structured_output_attempts": 0,
+      "usage": null,
+      "used": false,
+      "warning": null
+    },
+    "replayguard_version": "0.1.0",
+    "run_id": "4595cc3ff3af",
+    "target_adapter": "sample",
+    "target_endpoint": null
+  },
+  "question": "Can a team lead approve an equipment purchase up to $500 without director review?",
+  "report_directory": "brittle",
+  "schema_version": "1.0",
+  "summary": {
+    "brittle": 3,
+    "errors": 0,
+    "invalid": 0,
+    "overall_pass": false,
+    "passed": 1,
+    "required_replays": 4
+  },
+  "title": "Brittle procurement-policy target"
+}

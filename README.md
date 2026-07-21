@@ -22,6 +22,13 @@ between outputs is correct under four controlled evidence transformations:
 The top-level verdict is deterministic. GPT-5.6 performs a structured semantic assessment
 inside those guardrails and every check is labeled `deterministic` or `model_assisted`.
 
+## Judge quickstart
+
+Start with the [judge testing instructions](JUDGE_TEST.md), or open the committed
+[intentionally brittle report](reports/examples/brittle/index.html) and compare it with the
+[clean report](reports/examples/clean/index.html). These examples were generated in deterministic
+mode, are self-contained, and require no API key or model call.
+
 ## One-minute demo
 
 Requires Python 3.11 or newer.
@@ -58,7 +65,8 @@ For an offline smoke test, use `--analysis-mode deterministic`. `auto` uses GPT-
 `OPENAI_API_KEY` is present and records a warning when it falls back. `model` fails closed with
 exit code `2` when the required model assessment cannot run.
 
-Generated reports are local runtime outputs and are excluded from source control. Each
+Runtime reports are ignored. The deterministic judge examples under
+[`reports/examples/`](reports/examples/README.md) are intentionally committed. Each committed
 `index.html` is self-contained and can be opened directly without a server, CDN, or external
 assets.
 

@@ -8,4 +8,6 @@ __pycache__/
 *.py[cod]
 build/
 dist/
-reports/
+reports/*
+!reports/examples/
+!reports/examples/**
