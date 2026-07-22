@@ -1,0 +1,133 @@
+{
+  "analysis_layer": "native_released_evaluator",
+  "completeness": {
+    "complete_five_state_runs": 180,
+    "execution_errors": 0,
+    "expected_five_state_runs": 180,
+    "expected_logical_calls": 900,
+    "logical_calls_observed": 900,
+    "missing_or_duplicate_run_state_cells": 0,
+    "missing_prompt_pairs": 0,
+    "raw_attempts": 900,
+    "replicate_inconsistencies_under_frozen_primary_endpoint": 0,
+    "retries": 0,
+    "successful_calls": 900
+  },
+  "design": {
+    "arms": [
+      "naive",
+      "hardened"
+    ],
+    "domains": {
+      "equip": 5,
+      "infosec": 5,
+      "leave": 5,
+      "proc": 5,
+      "records": 5,
+      "travel": 5
+    },
+    "fixture_description": "distinct, self-contained controlled synthetic fixtures; fixtures and within-fixture replicates are not statistically independent",
+    "fixtures": 30,
+    "prompt_pairs": 90,
+    "replicates_per_fixture_arm": 3,
+    "states_per_run": 5,
+    "transformations": [
+      "equivalent",
+      "distractor",
+      "support_removed",
+      "no_evidence"
+    ]
+  },
+  "execution": {
+    "analysis_timestamp_end": "2026-07-18T17:58:29.279673+00:00",
+    "analysis_timestamp_start": "2026-07-18T17:13:34.855247+00:00",
+    "live_model_calls": true,
+    "model_requested": "gpt-5.6",
+    "returned_models": {
+      "gpt-5.6-sol": 900
+    },
+    "stateless": true,
+    "store": false,
+    "tools": []
+  },
+  "no_evidence": {
+    "hardened": {
+      "abstained": 90,
+      "canonical_persistence": 0,
+      "claims_empty": 90,
+      "claims_nonempty": 0,
+      "responses": 90,
+      "strict_fail": 0,
+      "strict_pass": 90
+    },
+    "naive": {
+      "abstained": 90,
+      "canonical_persistence": 0,
+      "claims_empty": 0,
+      "claims_nonempty": 90,
+      "responses": 90,
+      "strict_fail": 90,
+      "strict_pass": 0
+    }
+  },
+  "notes": [
+    "Native results preserve the released evaluator's decisions without correction.",
+    "A no-evidence strict failure can coexist with abstention when material_claims is nonempty.",
+    "Aggregate files contain no raw provider response IDs or response bodies."
+  ],
+  "primary_endpoint_run_counts": {
+    "hardened": {
+      "fail": 6,
+      "pass": 84,
+      "valid_runs": 90
+    },
+    "naive": {
+      "fail": 90,
+      "pass": 0,
+      "valid_runs": 90
+    }
+  },
+  "schema_version": "1.0",
+  "source_bindings": {
+    "attempt_ledger_sha256": "10aef25f06851072a0720ac469925a6b73ddc3dbf3b1f013b81d83f4d7cf0857",
+    "frozen_analysis_sha256": "6dcac829b274c994333e5bd21dcd3495e0361ea38c8f1dc9bc506ad789a5bbde"
+  },
+  "transition_results": {
+    "hardened": {
+      "distractor": {
+        "fail": 0,
+        "pass": 90
+      },
+      "equivalent": {
+        "fail": 6,
+        "pass": 84
+      },
+      "no_evidence": {
+        "fail": 0,
+        "pass": 90
+      },
+      "support_removed": {
+        "fail": 0,
+        "pass": 90
+      }
+    },
+    "naive": {
+      "distractor": {
+        "fail": 0,
+        "pass": 90
+      },
+      "equivalent": {
+        "fail": 4,
+        "pass": 86
+      },
+      "no_evidence": {
+        "fail": 90,
+        "pass": 0
+      },
+      "support_removed": {
+        "fail": 5,
+        "pass": 85
+      }
+    }
+  }
+}

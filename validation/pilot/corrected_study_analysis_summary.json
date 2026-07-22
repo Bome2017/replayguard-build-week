@@ -1,0 +1,201 @@
+{
+  "analysis_separation": {
+    "correction_method": "offline reclassification of the original structured records",
+    "full_model_rerun_after_product_correction": false,
+    "independent_human_adjudication_claimed": false,
+    "native_results_preserved": true,
+    "post_pilot_correction_is_offline_reclassification": true
+  },
+  "exploratory_not_confirmatory": true,
+  "frozen_preregistered_study_analysis": {
+    "primary_endpoint_run_counts": {
+      "hardened": {
+        "fail": 0,
+        "pass": 90,
+        "valid_runs": 90
+      },
+      "naive": {
+        "fail": 90,
+        "pass": 0,
+        "valid_runs": 90
+      }
+    },
+    "transition_results": {
+      "hardened": {
+        "distractor": {
+          "fail": 0,
+          "pass": 90
+        },
+        "equivalent": {
+          "fail": 0,
+          "pass": 90
+        },
+        "no_evidence": {
+          "fail": 0,
+          "pass": 90
+        },
+        "support_removed": {
+          "fail": 0,
+          "pass": 90
+        }
+      },
+      "naive": {
+        "distractor": {
+          "fail": 0,
+          "pass": 90
+        },
+        "equivalent": {
+          "fail": 0,
+          "pass": 90
+        },
+        "no_evidence": {
+          "fail": 90,
+          "pass": 0
+        },
+        "support_removed": {
+          "fail": 5,
+          "pass": 85
+        }
+      }
+    }
+  },
+  "layer_deltas": {
+    "frozen_study_analysis_to_post_pilot_product_evaluator_correction": {
+      "hardened_failures": {
+        "delta": 0,
+        "frozen_study": 0,
+        "post_pilot_product_correction": 0
+      },
+      "naive_failures": {
+        "delta": -5,
+        "frozen_study": 5,
+        "post_pilot_product_correction": 0
+      },
+      "reason": "retained context claim misclassified as canonical claim persistence",
+      "transformation": "support_removed"
+    },
+    "native_released_evaluator_to_frozen_preregistered_study_analysis": {
+      "hardened_failures": {
+        "delta": -6,
+        "frozen_study": 0,
+        "native": 6
+      },
+      "naive_failures": {
+        "delta": -4,
+        "frozen_study": 0,
+        "native": 4
+      },
+      "reason": "baseline citation selection dependency",
+      "transformation": "equivalent"
+    }
+  },
+  "post_pilot_product_evaluator_correction": {
+    "support_removal_correction_audit": [
+      {
+        "arm": "naive",
+        "domain": "travel",
+        "fixture_id": "travel-04",
+        "native_result": "fail",
+        "post_pilot_product_evaluator_correction_result": "pass",
+        "rationale_category": "retained_context_claim_misclassified_as_canonical_persistence",
+        "replicate": 1,
+        "run_id": "r1-naive-travel-04",
+        "source_artifact_sha256": "b6d82c73974999315747a4ef501f362622eda43d85f3a115b35ff5924610823c",
+        "transformation": "support_removed"
+      },
+      {
+        "arm": "naive",
+        "domain": "leave",
+        "fixture_id": "leave-03",
+        "native_result": "fail",
+        "post_pilot_product_evaluator_correction_result": "pass",
+        "rationale_category": "retained_context_claim_misclassified_as_canonical_persistence",
+        "replicate": 2,
+        "run_id": "r2-naive-leave-03",
+        "source_artifact_sha256": "2067c07eb4f9b43051ec67a30093c6fbe1d28f056342ac1f3bdc4ce1f4d88753",
+        "transformation": "support_removed"
+      },
+      {
+        "arm": "naive",
+        "domain": "leave",
+        "fixture_id": "leave-04",
+        "native_result": "fail",
+        "post_pilot_product_evaluator_correction_result": "pass",
+        "rationale_category": "retained_context_claim_misclassified_as_canonical_persistence",
+        "replicate": 2,
+        "run_id": "r2-naive-leave-04",
+        "source_artifact_sha256": "0901c7460081b82a7a04f594da4f50a9159f57fed83b1affefaaff689666a1a3",
+        "transformation": "support_removed"
+      },
+      {
+        "arm": "naive",
+        "domain": "travel",
+        "fixture_id": "travel-01",
+        "native_result": "fail",
+        "post_pilot_product_evaluator_correction_result": "pass",
+        "rationale_category": "retained_context_claim_misclassified_as_canonical_persistence",
+        "replicate": 2,
+        "run_id": "r2-naive-travel-01",
+        "source_artifact_sha256": "cef71853916fa2c665b8fad11effc01d7555795ad57a4e000c4aeb304cf1ea09",
+        "transformation": "support_removed"
+      },
+      {
+        "arm": "naive",
+        "domain": "leave",
+        "fixture_id": "leave-03",
+        "native_result": "fail",
+        "post_pilot_product_evaluator_correction_result": "pass",
+        "rationale_category": "retained_context_claim_misclassified_as_canonical_persistence",
+        "replicate": 3,
+        "run_id": "r3-naive-leave-03",
+        "source_artifact_sha256": "0acdd779ae33a54d3e17f03b59967b7b1671ef140a10194d37bb05ef47c50350",
+        "transformation": "support_removed"
+      }
+    ],
+    "transition_results": {
+      "hardened": {
+        "distractor": {
+          "fail": 0,
+          "pass": 90
+        },
+        "equivalent": {
+          "fail": 0,
+          "pass": 90
+        },
+        "no_evidence": {
+          "fail": 0,
+          "pass": 90
+        },
+        "support_removed": {
+          "fail": 0,
+          "pass": 90
+        }
+      },
+      "naive": {
+        "distractor": {
+          "fail": 0,
+          "pass": 90
+        },
+        "equivalent": {
+          "fail": 0,
+          "pass": 90
+        },
+        "no_evidence": {
+          "fail": 90,
+          "pass": 0
+        },
+        "support_removed": {
+          "fail": 0,
+          "pass": 90
+        }
+      }
+    }
+  },
+  "schema_version": "1.0",
+  "source_bindings": {
+    "corrected_evaluator_sha256": "0fb7ea83355ca74d7c749c421601b33a2c2ff96fdfd0fb4030095ad9d85e11bf",
+    "correction_commit": "a3629ba547c3665aefe17729e90f11bf7c5f6673",
+    "correction_test_sha256": "823b19dcd7a2103a639df89de5d09aab41ac62d415c35b4c153412282c39231f",
+    "frozen_analysis_sha256": "6dcac829b274c994333e5bd21dcd3495e0361ea38c8f1dc9bc506ad789a5bbde"
+  }
+}

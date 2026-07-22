@@ -1,0 +1,77 @@
+{
+  "analysis_timestamp_range": {
+    "end": "2026-07-18T17:58:29.279673+00:00",
+    "start": "2026-07-18T17:13:34.855247+00:00"
+  },
+  "correction_version": {
+    "commit": "a3629ba547c3665aefe17729e90f11bf7c5f6673",
+    "current_public_source_contains_product_correction": false,
+    "evaluator_module_sha256": "0fb7ea83355ca74d7c749c421601b33a2c2ff96fdfd0fb4030095ad9d85e11bf",
+    "full_model_rerun_after_product_correction": false,
+    "post_pilot_correction_is_offline_reclassification": true,
+    "regression_test_sha256": "823b19dcd7a2103a639df89de5d09aab41ac62d415c35b4c153412282c39231f"
+  },
+  "current_public_comparison_at_audit_start": {
+    "byte_identical_on_all_evaluated_source_paths": false,
+    "commit": "920c01371be4f64ba963ff02c8302e45aed48ca1",
+    "differences": [
+      {
+        "evaluated_sha256": "897e089fc529119c25fa83187df136427f68736c5e45eee2138dcae8b5a90b7d",
+        "path": "src/replayguard/adapters.py",
+        "public_sha256": "502e49e7f3b230f7b65b6139363668ff84f85a5f717edbb6100f6a0ada90a36d"
+      }
+    ],
+    "evaluator_module_byte_identical": true,
+    "evaluator_module_sha256": "93c3c663c01e35a09d211dea79d92f5df1b7bdb9ea06adac62de3ecfda9b433c",
+    "source_tree_sha256_on_evaluated_paths": "3be157114b629d02699a9530dcdd18e506f987201df68eb512f79e7422990fb2"
+  },
+  "evaluated_version": {
+    "commit": "d0dc3637a14b06bf16d6dc930d700116f38f8175",
+    "evaluator_module_sha256": "93c3c663c01e35a09d211dea79d92f5df1b7bdb9ea06adac62de3ecfda9b433c",
+    "git_tree_sha1": "431126e0fc09cef9633fdc054747f26afef9373b",
+    "package_version": "0.1.0",
+    "result_schema_version": "1.0",
+    "source_tree_digest_definition": "SHA-256 over sorted source path, NUL, file SHA-256, and newline records",
+    "source_tree_sha256": "b9059503a2246d1630504a2df8458731042e7adecc040c1ac163c0bdb967edea"
+  },
+  "fixture_sources": {
+    "execution_matrix_sha256": "514b4a39ff9229bf27ad684d8726658ceb61f27fea7410a9ab0d9fe14450f55d",
+    "fixture_bank_sha256": "713a1f89d652644d0409ccd546eab6528cc47b34cfecd6b875c4f3b2cc97fcb7"
+  },
+  "preregistration_binding": {
+    "execution_preflight_sha256": "579adb354dcac70f35e9abe128abfefd1688c1f38360161d2024259d4802e351",
+    "execution_preflight_time": "2026-07-18T17:12:42.154119+00:00",
+    "external_timestamp_authority": false,
+    "first_call_artifact_time": "2026-07-18T10:13:21.967240-07:00",
+    "first_result_time": "2026-07-18T17:13:34.855247+00:00",
+    "ordering_verified": true,
+    "preanalysis_plan_sha256": "15b6873741d200e5a3348d3bdb3f4e691766f48dada794b6a0685a703ebfd25c",
+    "status": "locally_preregistered_and_git_frozen_before_execution",
+    "study_commit": "bf56bb34c4b1a1d1c301fbc8ff2d0be795a8d6b8",
+    "study_commit_time": "2026-07-18T09:46:25-07:00",
+    "study_manifest_sha256": "9ebd27eb516df7bf4e309d28b1fa759c2855a58ff2ac09db56182db80b584615",
+    "study_protocol_sha256": "a18bcb22d7b5492eac4340f7b6b3b7f81902c418601d694f85c826a83f8043be"
+  },
+  "prompts": {
+    "hardened": {
+      "sha256": "8940835784c5dbdbb0e64129b6411d1cc3cd630f095ffcf56a83803ec6977b85",
+      "version": "pilot-v1"
+    },
+    "naive": {
+      "sha256": "5eb04983348f972384100514b1b06bede42f9d156aae59bd38282308dbaccbaf",
+      "version": "pilot-v1"
+    }
+  },
+  "schema_version": "1.0",
+  "target_parameters": {
+    "max_output_tokens": 1200,
+    "model_requested": "gpt-5.6",
+    "reasoning_effort": "low",
+    "service_tier": "default",
+    "stateless": true,
+    "store": false,
+    "strict_structured_outputs": true,
+    "target_parameters_sha256": "30d15d97f6faa631f2dcbf027a52873b2eb1ff91c4b9475ef73142d32f74fa4d",
+    "tools": []
+  }
+}

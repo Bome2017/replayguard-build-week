@@ -1,0 +1,128 @@
+{
+  "artifacts": [
+    {
+      "hash_mode": "exact_bytes",
+      "media_type": "text/markdown",
+      "path": "PILOT_VALIDATION.md",
+      "role": "judge_summary",
+      "schema_version": "1.0",
+      "sha256": "74dd233418122af95d32334622de8e5f368580bb987728b90270b569739901ac",
+      "size": 7971
+    },
+    {
+      "hash_mode": "exact_bytes",
+      "media_type": "text/x-python",
+      "path": "scripts/validate_pilot_package.py",
+      "role": "offline_validator",
+      "schema_version": "1.0",
+      "sha256": "0c5f3ec0cc632d67f9520a1b79bdc1d6e68069dddcf9e01328523db8db483b98",
+      "size": 46798
+    },
+    {
+      "hash_mode": "exact_bytes",
+      "media_type": "text/x-python",
+      "path": "tests/test_pilot_package.py",
+      "role": "validator_test",
+      "schema_version": "1.0",
+      "sha256": "091ebac0938fa3597d16a8f104c022b434ec447d04f9f1a339adcd92243ddef0",
+      "size": 5248
+    },
+    {
+      "hash_mode": "exact_bytes",
+      "media_type": "text/markdown",
+      "path": "validation/pilot/CLAIM_EVIDENCE_MATRIX.md",
+      "role": "claim_evidence_matrix",
+      "schema_version": "1.0",
+      "sha256": "100372453ad03132b7afd39e6646a4239477094c6983baf20ad4e5a9b26b74fb",
+      "size": 19535
+    },
+    {
+      "hash_mode": "exact_bytes",
+      "media_type": "text/markdown",
+      "path": "validation/pilot/METHODOLOGY.md",
+      "role": "methodology",
+      "schema_version": "1.0",
+      "sha256": "7d81879b765f73ad81cb0a6663314549a2d1d889aa1f2a31917f12706f93b285",
+      "size": 8656
+    },
+    {
+      "hash_mode": "exact_bytes",
+      "media_type": "text/markdown",
+      "path": "validation/pilot/README.md",
+      "role": "package_index",
+      "schema_version": "1.0",
+      "sha256": "0907de02ca7c135f0a507d081f6d3af0d9a7abf14d24c5391d21b07f79a80e20",
+      "size": 2757
+    },
+    {
+      "hash_mode": "normalized_self_sha256",
+      "media_type": "application/json",
+      "normalized_sha256": "fb1ea934b847ed637f1a985f6c1841fcedc4c82122e0a0de06b88d44d23be270",
+      "path": "validation/pilot/artifact_manifest.json",
+      "role": "artifact_manifest",
+      "schema_version": "1.0",
+      "size": 4408
+    },
+    {
+      "hash_mode": "exact_bytes",
+      "media_type": "application/json",
+      "path": "validation/pilot/corrected_study_analysis_summary.json",
+      "role": "separated_study_and_product_correction_summary",
+      "schema_version": "1.0",
+      "sha256": "3f8b2ff99efd2d0e3576f64d797fae16830bc41191f5974b3b5456d30177e289",
+      "size": 5999
+    },
+    {
+      "hash_mode": "exact_bytes",
+      "media_type": "text/csv",
+      "path": "validation/pilot/equivalent_disagreement_audit.csv",
+      "role": "equivalent_disagreement_audit",
+      "schema_version": "1.0",
+      "sha256": "084e1cd940fb67bb7657f008843ac8e79382a72c9891204e3f2ed076e23876f5",
+      "size": 1879
+    },
+    {
+      "hash_mode": "exact_bytes",
+      "media_type": "application/json",
+      "path": "validation/pilot/evaluated_version.json",
+      "role": "evaluated_version_binding",
+      "schema_version": "1.0",
+      "sha256": "62ef3a2636f7fac0b24ea1d36c746850e0c9d2c62596e132ecccac4c5a254dce",
+      "size": 3616
+    },
+    {
+      "hash_mode": "exact_bytes",
+      "media_type": "text/csv",
+      "path": "validation/pilot/fixture_manifest.csv",
+      "role": "fixture_manifest",
+      "schema_version": "1.0",
+      "sha256": "0ae84577b17526610bd5183ef47c3a5f342ec011547112e9037ff99ca5057eb0",
+      "size": 2712
+    },
+    {
+      "hash_mode": "exact_bytes",
+      "media_type": "application/json",
+      "path": "validation/pilot/native_released_evaluator_summary.json",
+      "role": "native_summary",
+      "schema_version": "1.0",
+      "sha256": "e2b9709ebc3eb4f6fcf49ecf81b60edda5d7577ca140e51015ec0c02d2b886b7",
+      "size": 3192
+    },
+    {
+      "hash_mode": "exact_bytes",
+      "media_type": "text/csv",
+      "path": "validation/pilot/run_manifest.csv",
+      "role": "run_manifest",
+      "schema_version": "1.0",
+      "sha256": "5e555e3a5f60d09c60c8efaceede7218568d54f754c39064c81d94e35486aae6",
+      "size": 115925
+    }
+  ],
+  "hash_algorithm": "sha256",
+  "schema_version": "1.0",
+  "self_hash_convention": {
+    "description": "Canonical JSON with only this manifest entry's normalized_sha256 replaced by 64 ASCII zeroes",
+    "path": "validation/pilot/artifact_manifest.json",
+    "serialization": "UTF-8, sorted keys, indent 2, final newline"
+  }
+}

@@ -19,8 +19,10 @@ between outputs is correct under four controlled evidence transformations:
 | Decisive support removed | Remove all declared support for the claim | Weaken, change, or abstain |
 | No usable evidence | Send an empty evidence packet | Abstain and declare insufficiency |
 
-The top-level verdict is deterministic. GPT-5.6 performs a structured semantic assessment
-inside those guardrails and every check is labeled `deterministic` or `model_assisted`.
+Pass/fail transition gates are deterministic. In model mode, a high-confidence semantic-contract
+finding can instead classify an equivalent or distractor perturbation as an invalid test. GPT-5.6
+performs that structured assessment, and every check is labeled `deterministic` or
+`model_assisted`.
 
 ## Judge quickstart
 
@@ -28,6 +30,17 @@ Start with the [judge testing instructions](JUDGE_TEST.md), or open the committe
 [intentionally brittle report](reports/examples/brittle/index.html) and compare it with the
 [clean report](reports/examples/clean/index.html). These examples were generated in deterministic
 mode, are self-contained, and require no API key or model call.
+
+## Pilot validation
+
+The [pilot validation summary](PILOT_VALIDATION.md) publishes a sanitized, offline-checkable
+evidence package for an exploratory 900-call prompt-contract study. Start with the
+[package index](validation/pilot/README.md), then inspect the separate
+[native released-evaluator summary](validation/pilot/native_released_evaluator_summary.json),
+[corrected study analysis](validation/pilot/corrected_study_analysis_summary.json), and
+[ten-case equivalent disagreement audit](validation/pilot/equivalent_disagreement_audit.csv).
+The original pilot involved live model calls, but reviewing and validating the committed package
+requires no API key or model call.
 
 ## One-minute demo
 
@@ -46,11 +59,12 @@ replayguard test fixtures/demo_brittle.yaml \
   --output reports/demo
 ```
 
-The intentionally brittle target returns exit code `1`, writes
-`reports/demo/result.json`, and generates `reports/demo/index.html`. The expected result is one
-passing invariance contract and three visible brittleness failures. Open the HTML report and
-expand any failed row to see the answers, changed evidence, unsupported claims, orphaned
-citations, and exact failed rule.
+When the semantic assessment succeeds and accepts the fixture contracts, the intentionally brittle
+target returns exit code `1`, writes `reports/demo/result.json`, and generates
+`reports/demo/index.html`. The expected result is one passing invariance contract and three visible
+brittleness failures. A required model failure or invalid-test finding instead exits `2`. Open the
+HTML report and expand any failed row to see the answers, changed evidence, unsupported claims,
+orphaned citations, and exact failed rule.
 
 To prove the green path:
 
@@ -81,8 +95,8 @@ deterministic perturbation builder + malformed-variant checks
       v
 target adapter (explicit evidence packet -> structured response)
       |
-      +--> one GPT-5.6 structured semantic batch
-      |    (equivalence, claim/citation support, concise explanation)
+      +--> one batched GPT-5.6 semantic assessment (model mode only)
+      |    (one repeated attempt is allowed for unparsed/schema-invalid output)
       v
 deterministic transition engine
       |
@@ -96,15 +110,18 @@ The core package is intentionally small:
 - `models.py` — strict Pydantic fixture, adapter, result, and model-output contracts.
 - `perturbations.py` — deterministic construction and validation of all four replays.
 - `adapters.py` — sample demo targets and a custom JSON HTTP adapter boundary.
-- `analysis.py` — one batched GPT-5.6 Responses API structured-output call.
+- `analysis.py` — one batched GPT-5.6 assessment, with one repeated structured-output attempt.
 - `verdicts.py` — deterministic invariance and sensitivity gates.
 - `report.py` and `templates/` — machine-readable JSON and a single-file HTML report.
 - `cli.py` — CI-oriented command, summary, report path, and exit code.
 
 ## Why GPT-5.6 is material
 
-ReplayGuard sends the baseline output and all four replay packets to GPT-5.6 in one structured
-Responses API request. The model must return exactly one typed assessment per replay. It checks:
+ReplayGuard sends the baseline output and all four replay packets to GPT-5.6 in one batched
+structured assessment. It makes a second application-level attempt only when the first result is
+unparsed or fails schema validation. The SDK may separately retry eligible transport failures under
+its configured policy. A successful batch must return exactly one typed assessment per replay. It
+checks:
 
 - whether equivalent and distractor transformations preserve their semantic contract;
 - whether paraphrased answers and material claims remain semantically aligned;
@@ -114,16 +131,19 @@ Responses API request. The model must return exactly one typed assessment per re
 
 A high-confidence finding that an equivalent/distractor perturbation is malformed invalidates
 the test instead of blaming the target. Semantic claim analysis is labeled model-assisted and
-kept advisory for differences in human-readable claim prose. The code—not GPT-5.6—enforces the
-final allowed verdict transitions, citation IDs, support removal, abstention, result category, and
-exit status. Confidence delta remains visible as a diagnostic when a replay changes verdict class.
+kept advisory for differences in human-readable claim prose. Subject to that explicit invalid-test
+guard, the code—not GPT-5.6—enforces allowed verdict transitions, citation IDs, support removal,
+abstention, result category, and exit status. Confidence delta remains visible as a diagnostic when
+a replay changes verdict class.
 
 For reproducibility, `result.json` records the requested and returned model, reasoning effort,
 response ID, token usage, prompt version, prompt SHA-256, fixture SHA-256, package version, and
-analysis mode. Requests use `store=False`; secrets and the API key are never written to output.
+analysis mode. Requests use `store=False`. ReplayGuard does not serialize `OPENAI_API_KEY` or the
+configured HTTP bearer-token value itself, but reports do include fixture evidence and target
+responses verbatim; do not put secrets in that content.
 
-The implementation follows OpenAI's current guidance to use the Responses API for GPT-5.6 and
-the SDK's Pydantic structured-output parser:
+The implementation uses the Responses API for GPT-5.6 and the SDK's Pydantic structured-output
+parser; the linked references describe those interfaces:
 [GPT-5.6 model guidance](https://developers.openai.com/api/docs/guides/latest-model) and
 [Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs).
 
@@ -190,7 +210,7 @@ diagnostic report reference for support-removal transitions; it does not overrid
 from `supported` to `insufficient_evidence`. A gating confidence rule would require an unambiguous
 same-proposition confidence contract.
 
-See [`fixtures/README.md`](fixtures/README.md) and the four self-authored fixtures. The fixture
+See [`fixtures/README.md`](fixtures/README.md) and the four project-authored fixtures. The fixture
 text is fictional and covered by this project's PolyForm Noncommercial License 1.0.0; no third-party benchmark is
 required.
 
@@ -205,7 +225,8 @@ replayguard test fixtures/clean_policy.yaml \
   --output reports/http-target
 ```
 
-ReplayGuard sends `POST application/json` with:
+ReplayGuard sends `POST application/json` with the fields below. `output_schema` is abbreviated as
+`{}` for readability; the actual request contains the full `TargetResponse` JSON Schema.
 
 ```json
 {
@@ -233,15 +254,23 @@ The target must return JSON matching:
 `claim_under_test` is the fixture's canonical claim, and `verdict` is the target's structured
 disposition toward it. ReplayGuard does not require the human-readable `answer` or
 `material_claims` to repeat that claim exactly. Baseline validity requires the expected verdict,
-resolving citations, and at least one citation to declared support. Equivalent and distractor
-invariance use the unchanged verdict and citation contracts; claim-prose comparison is advisory.
+resolving citations, and at least one citation to declared support. Distractor invariance uses the
+unchanged verdict and packet-local citation contracts; claim-prose comparison is advisory.
 
-For support removal, deterministic gates require the decisive support to be absent, a permitted
-weakened disposition with insufficient or partial evidence sufficiency, no persisted canonical
-affirmative claim, and citations confined to the current packet. A response that remains
-`supported` without surviving support, cites removed evidence, or explicitly retains the canonical
-claim is brittle regardless of confidence. Confidence delta is reported but non-gating when the
-verdict class changes.
+The current `0.1.0` equivalent gate additionally requires every replay citation to map to a
+citation selected by the baseline response. This is stricter than the intended packet-level
+replacement-support contract and can produce false failures when valid retained context was not
+selected at baseline. The [pilot validation](PILOT_VALIDATION.md) documents ten such native flags
+and keeps the later correction separate from current public product code.
+
+For support removal, deterministic gates require decisive support to be absent, a permitted
+weakened disposition with insufficient or partial evidence sufficiency, and citations confined to
+the current packet. The current `0.1.0` gate rejects persistence of either the canonical fixture
+claim or any normalized baseline material claim. That broader comparison can also flag permitted
+retained-context claims; the pilot package documents five native flags reclassified by the later
+evaluator audit. A response that remains `supported` without surviving support, cites removed
+evidence, or preserves a gated affirmative claim is brittle regardless of confidence. Confidence
+delta is reported but non-gating when the verdict class changes.
 
 This behavior uses schema version 1.0 and does not add fields to the request/response shape above.
 
@@ -303,22 +332,21 @@ HTTP validation, reports, and CLI output.
 
 ### Supported platforms
 
-- Python 3.11 or newer on macOS and Linux.
-- The clean acceptance run in this repository was executed on macOS with Python 3.13.
-- Windows is not yet acceptance-tested. The package code is OS-neutral, but the documented shell
-  commands use POSIX activation syntax.
+- Python 3.11 or newer; the public workflow runs Python 3.13 on Ubuntu.
+- Windows is not yet acceptance-tested, and the documented shell commands use POSIX activation
+  syntax.
 
 ## Current scope
 
 **Implemented MVP**
 
-- All four controlled replay types, deterministic final verdicts, and fail-closed fixtures.
+- All four controlled replay types, deterministic pass/fail gates, and fail-closed fixtures.
 - Invariance and sensitivity checks across verdicts, claims, citations, surviving support, and
   evidence sufficiency, with confidence delta retained as a diagnostic.
-- Meaningful GPT-5.6 structured semantic analysis with recorded reproducibility metadata.
+- Typed, batched GPT-5.6 semantic analysis with recorded reproducibility metadata.
 - Custom JSON HTTP target adapter plus compliant and deliberately brittle local sample behaviors.
-- Human-readable CLI, stable JSON, polished responsive HTML, structured logs, and CI exit codes.
-- Four fictional, self-authored fixtures and automated tests.
+- Human-readable CLI, stable JSON, single-file responsive HTML, structured logs, and CI exit codes.
+- Four fictional project fixtures and automated tests.
 
 **Experimental**
 

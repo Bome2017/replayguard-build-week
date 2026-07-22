@@ -1,6 +1,7 @@
 # Judge testing instructions
 
-ReplayGuard is a Python 3.11+ developer tool. The supported MVP platforms are macOS and Linux.
+ReplayGuard is a Python 3.11+ developer tool. The commands below use a POSIX shell and are exercised
+by the public Linux CI workflow; Windows activation differs and is not acceptance-tested.
 The public repository is
 [Bome2017/replayguard-build-week](https://github.com/Bome2017/replayguard-build-week).
 
@@ -18,6 +19,30 @@ Both HTML files are self-contained: their styles and report data are embedded, t
 network requests, and they need no server, API key, account, or model call. The committed files
 were generated from the current public source in deterministic mode. They are judge examples,
 not live-model validation.
+
+## Validation evidence
+
+The exploratory live-model pilot is documented in the
+[pilot validation summary](PILOT_VALIDATION.md) and the
+[pilot package README](validation/pilot/README.md). Judges can inspect:
+
+- the [native released-evaluator summary](validation/pilot/native_released_evaluator_summary.json);
+- the [corrected study analysis](validation/pilot/corrected_study_analysis_summary.json);
+- the [exact ten-case equivalent disagreement audit](validation/pilot/equivalent_disagreement_audit.csv);
+- the [evaluated-version binding](validation/pilot/evaluated_version.json); and
+- the [sanitized run manifest](validation/pilot/run_manifest.csv).
+
+Validate every committed headline count offline from the repository root:
+
+```bash
+python scripts/validate_pilot_package.py
+```
+
+The deterministic product examples above require no API key. The pilot involved 900 live model
+calls, but its committed validation package is sanitized and entirely offline; judges do not need
+to rerun those calls. Native released-evaluator results, the preregistered study gate applied
+offline to the original records, and the later product-evaluator correction are separate layers.
+No full model rerun occurred after the later product correction.
 
 ## Two-minute deterministic runnable path
 
@@ -61,21 +86,34 @@ replayguard test fixtures/demo_brittle.yaml \
   --output reports/judge-model
 model_exit=$?
 set -e
-test "$model_exit" -eq 1
+case "$model_exit" in
+  1) echo "Expected brittle finding from a completed model assessment" ;;
+  2) echo "Fail-closed model/fixture error; inspect stderr" >&2 ;;
+  *) echo "Unexpected model-mode exit: $model_exit" >&2; exit 1 ;;
+esac
 ```
 
-This judge-generated model-mode result records the returned response ID and model metadata in
-`reports/judge-model/result.json`. ReplayGuard sends one structured assessment request with
-`store=False`; it never serializes the API key. The repository does not commit model-mode output
-or a returned response ID.
+When the semantic assessment succeeds and accepts the fixture contracts, the brittle fixture exits
+`1`; its completed result records the returned response ID and model metadata in
+`reports/judge-model/result.json`. Exit `2` is fail-closed for a required-model, fixture, target, or
+invalid-test error and can occur before report creation. ReplayGuard sends one batched structured
+assessment with `store=False` and repeats that application-level structured-output attempt once
+only if the first output is unparsed or schema-invalid. The SDK may separately retry eligible
+transport failures under its configured policy. ReplayGuard does not serialize the API key itself.
+The repository does not commit model-mode output or a returned response ID.
 
 ## Exact resource use
 
-- Every fixture executes the local sample target exactly five times: baseline plus four replays.
-- Deterministic mode makes zero model or provider API requests.
-- Model mode makes exactly one GPT-5.6 Responses API request per fixture after the five target
-  executions.
-- Every run writes two files in the selected output directory: `index.html` and `result.json`.
+- Every fixture using the local sample target executes that target exactly five times: baseline
+  plus four replays. A custom HTTP target instead receives five target requests.
+- Deterministic analysis makes zero OpenAI model-assessment requests. With the local sample target,
+  it makes no network request.
+- After five successful target executions, model analysis makes one batched application-level
+  assessment attempt and repeats the same structured-output attempt at most once if the first is
+  unparsed or schema-invalid. The SDK controls any lower-level retry of eligible transport
+  failures.
+- Every completed run writes two files in the selected output directory: `index.html` and
+  `result.json`. Some exit-`2` errors occur before report creation.
 - After cloning and installing the pinned dependencies, deterministic mode requires no database,
   web server, API key, account, container, or paid service.
 
