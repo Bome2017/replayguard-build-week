@@ -377,6 +377,38 @@ HTTP validation, reports, and CLI output.
 - Model availability, rate limits, invalid credentials, target timeouts, malformed target JSON,
   and unknown citation IDs fail closed or produce explicit warnings according to analysis mode.
 
+## Build Week provenance and submission
+
+ReplayGuard's core was built during the submission period in one timestamped Codex task.
+This repository is the canonical submission repository. Earlier private
+evidence-replay research was read for terminology and contract design but remains frozen and
+unmodified.
+ReplayGuard does not contain or import unrelated private workspace code or research artifacts. See
+[`docs/PREEXISTING_CONCEPTS.md`](docs/PREEXISTING_CONCEPTS.md) and
+[`docs/BUILD_WEEK_CHANGELOG.md`](docs/BUILD_WEEK_CHANGELOG.md) for the exact boundary.
+
+### How Codex accelerated the build
+
+The majority of ReplayGuard's core functionality was built in one Codex task during the Build
+Week submission period. Codex accelerated five concrete parts of the workflow:
+
+1. It read the frozen evidence-replay research and extracted only the invariance, sensitivity,
+   and perturbation-contract concepts needed for a focused product.
+2. It implemented the first vertical slice before polish: one fixture, five target executions,
+   all four replays, deterministic verdicts, CLI output, and a visible brittle report.
+3. It used current OpenAI documentation to select the GPT-5.6 Responses API, explicit `low`
+   reasoning effort, Pydantic Structured Outputs, and `store=False` metadata handling.
+4. It adversarially exercised green, brittle, invalid-model, and malformed-target paths, then
+   added regression tests for the failures found.
+5. It performed a second clean-environment install plus desktop/mobile browser QA of the report.
+
+The key human/product decisions were to keep deterministic rules in control of final verdicts,
+use one batched model call rather than five opaque calls, ship self-authored fixtures to eliminate
+licensing ambiguity, choose CLI plus single-file HTML for a one-minute judge experience, and
+keep every qualifying file isolated from the historical research tree. GPT-5.6 contributes the
+semantic comparison layer at runtime; Codex built, tested, documented, and visually audited the
+product.
+
 ## License
 
 ReplayGuard is source-available under the
@@ -384,3 +416,7 @@ ReplayGuard is source-available under the
 
 Commercial use requires a separate written commercial license. See
 [COMMERCIAL-LICENSING.md](COMMERCIAL-LICENSING.md).
+
+OpenAI, Devpost, and designated Build Week judges may access, install, execute, test, and evaluate
+this submission under the temporary
+[Build Week Evaluation Grant](BUILD_WEEK_EVALUATION_GRANT.md).

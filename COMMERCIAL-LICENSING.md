@@ -5,6 +5,9 @@ ReplayGuard is source-available under the
 
 Commercial use requires a separate written commercial license from Sanjit Mehat.
 
+Build Week judging and verification covered by the temporary
+[Build Week Evaluation Grant](BUILD_WEEK_EVALUATION_GRANT.md) do not require a commercial license.
+
 Commercial licensing inquiries:
 
 - Licensor: Sanjit Mehat
